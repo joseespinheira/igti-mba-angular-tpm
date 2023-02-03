@@ -1,0 +1,32 @@
+
+<div class="header">
+    <h3>{{titulo}}</h3>
+    <h4 *ngIf="qtdEscolhas > 1">Escolha até {{qtdEscolhas}} 
+        <ng-template [ngIf]="qtdSelecionados>0">({{qtdSelecionados}} selecionado<ng-template [ngIf]="qtdSelecionados>1">s</ng-template>)</ng-template>
+    </h4>
+</div>
+
+<ul>
+    <li *ngFor="let opcao of opcoes">
+
+        <ng-template [ngIf]="qtdEscolhas==1">
+            <input type='radio' 
+                name="opcao" 
+                [id]="opcao" 
+                [value]="opcao" >
+        </ng-template>
+
+        <ng-template [ngIf]="qtdEscolhas>1">
+            <input #teste
+                type='checkbox' 
+                (change)="select($event)" 
+                name="opcao" 
+                [id]="opcao" 
+                [disabled]="desabilitar && !teste.checked"
+                [value]="opcao">
+        </ng-template>
+
+        <label [for]="opcao">{{opcao}}</label> 
+
+    </li>
+</ul>
